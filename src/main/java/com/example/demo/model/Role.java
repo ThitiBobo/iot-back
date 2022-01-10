@@ -5,6 +5,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "roles")
 public class Role {
+
+    public enum ERole {
+        ROLE_USER,
+        ROLE_MODERATOR,
+        ROLE_ADMIN
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

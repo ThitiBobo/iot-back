@@ -1,5 +1,6 @@
 package com.example.demo.security.service;
 
+import com.example.demo.exception.EmailNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return UserDetailsImpl.build(user);
     }
 
+    public UserDetails loadUserByEmail(String email) throws EmailNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EmailNotFoundException("User Not Found with email: " + email));
+        return UserDetailsImpl.build(user);
+    }
 }
